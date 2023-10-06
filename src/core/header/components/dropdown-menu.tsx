@@ -1,15 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { NavLink } from 'react-router-dom';
 import { NavigationItem } from '../models';
 import * as Styled from '../styled';
 
 interface DropdownMenuProps {
   navItem: NavigationItem;
+  linkClick: () => void;
 }
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ navItem }) => {
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ navItem, linkClick }) => {
   const onLinkClick = () => {
-    console.log('link click');
+    linkClick();
   };
 
   return (
@@ -33,19 +35,23 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ navItem }) => {
               {group.title}
             </div>
             {group.links.map((link) => (
-              <div
+              <NavLink
                 key={link.title}
+                to={link.url}
                 onClick={onLinkClick}
                 css={css`
+                  display: block;
                   padding: 6px 16px;
                   margin-bottom: 8px;
+                  text-decoration: none;
+                  color: inherit;
                   &:hover {
                     cursor: pointer;
                     background-color: #e9ecef;
                   }
                 `}>
                 {link.title}
-              </div>
+              </NavLink>
             ))}
           </>
         </div>

@@ -27,7 +27,7 @@ const NavigationBtn: React.FC<NavigationBtnProps> = ({ navItem }) => {
         sx={{ my: 2, color: 'white', display: 'block' }}>
         {navItem.title}
       </Button>
-      {isShowMenu && <DropdownMenu navItem={navItem} />}
+      {isShowMenu && <DropdownMenu navItem={navItem} linkClick={() => setIsShowMenu(false)} />}
     </div>
   );
 };
