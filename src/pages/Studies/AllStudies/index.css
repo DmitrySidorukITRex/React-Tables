@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  min-width: 120px;
+}
+
+th, td {
+  padding: 8px;
+}
+
+.table-wrapper {
+  height: calc(100vh - 215px);
+  overflow: auto;
+}
