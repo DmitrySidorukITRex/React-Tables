@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { Button } from '@mui/material';
 import { css } from '@emotion/react';
+import { Button } from '@mui/material';
 import { useRef, useState } from 'react';
+import useOnClickOutside from 'src/shared/hooks/useClickOutside';
 import { NavigationItem } from '../models';
-import useOnClickOutside from '../../../shared/hooks/useClickOutside';
 import DropdownMenu from './dropdown-menu';
 
 interface NavigationBtnProps {
