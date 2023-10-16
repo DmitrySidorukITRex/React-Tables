@@ -3,7 +3,7 @@ import { Study } from './models';
 export const ALL_STUDIES: Study[] = [
   {
     name: 'Kidney Study 25 - Mimetas Efflux Transporter Activity - TERT-OAT3',
-    startDate: '2022-05-02',
+    startDate: new Date('2022-05-02'),
     type: 'CC',
     models: [
       'Kidney Proximal Tubule [384-well Static]',
@@ -14,7 +14,7 @@ export const ALL_STUDIES: Study[] = [
   },
   {
     name: 'Quantitative analysis of Ca2+ signaling in SGm stimulated with ATP',
-    startDate: '2022-03-18',
+    startDate: new Date('2022-03-18'),
     type: 'TOX',
     models: ['Salivary Gland', '[URochester]'],
     points: 585,
@@ -22,7 +22,7 @@ export const ALL_STUDIES: Study[] = [
   },
   {
     name: 'Viability of hydrogel encapsulated AIDUCs',
-    startDate: '2022-03-17',
+    startDate: new Date('2022-03-17'),
     type: 'TOX',
     models: ['Salivary Gland', '[URochester]'],
     points: 49,
@@ -30,7 +30,7 @@ export const ALL_STUDIES: Study[] = [
   },
   {
     name: 'Gene expression of acinar cell marker Mist1',
-    startDate: '2022-03-03',
+    startDate: new Date('2022-03-03'),
     type: 'TOX',
     models: ['Salivary Gland', '[URochester]'],
     points: 8,
@@ -38,7 +38,7 @@ export const ALL_STUDIES: Study[] = [
   },
   {
     name: 'Liver_Mimetas 2-lane_Exp.13_iHep and NPCs with Trovafloxacin ± LPS_2nd',
-    startDate: '2022-02-11',
+    startDate: new Date('2022-02-11'),
     type: 'TOX',
     models: ['Liver vs Mimetas 2-lane 2D', 'Mimetas 2-lane Liver Chip'],
     points: 482,

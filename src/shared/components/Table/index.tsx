@@ -3,9 +3,13 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import { PropsWithChildren, useEffect, useState } from 'react';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import TablePagination from './Pagination';
 import './styles.css';
 
@@ -17,13 +21,18 @@ interface MenuProps<T> {
 const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<T>>) => {
   const [pageSize, setPageSize] = useState(10);
   const [pageIndex, setPageIndex] = useState(0);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data: data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-  const paginationBtnCount = Math.ceil(data.length / pageSize);
 
   useEffect(() => {
     table.setPageSize(pageSize);
@@ -60,9 +69,20 @@ const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
+                    {header.isPlaceholder ? null : (
+                      <div
+                        className="sort-column"
+                        onClick={header.column.getToggleSortingHandler()}>
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.column.getIsSorted() ? (
+                          (header.column.getIsSorted() as string) === 'asc' ? (
+                            <KeyboardArrowUpIcon />
+                          ) : (
+                            <KeyboardArrowDownIcon />
+                          )
+                        ) : null}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>
@@ -83,7 +103,7 @@ const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<
         dataLength={data.length}
         rowsLength={table.getRowModel().rows.length}
         currentPageIndex={pageIndex}
-        paginationBtnCount={paginationBtnCount}
+        paginationBtnCount={table.getPageCount()}
         onChangePageIndex={onChangePageIndex}
       />
     </>

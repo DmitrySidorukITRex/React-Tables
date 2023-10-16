@@ -12,6 +12,14 @@ const columns = [
   }),
   columnHelper.accessor('startDate', {
     header: 'Start Date',
+    cell: (info) =>
+      new Intl.DateTimeFormat('en-us').formatToParts(info.getValue()).map((part) => {
+        if (part.type === 'literal') {
+          return '-';
+        }
+
+        return part.value;
+      }),
   }),
   columnHelper.accessor('type', {
     header: 'Study Types',
