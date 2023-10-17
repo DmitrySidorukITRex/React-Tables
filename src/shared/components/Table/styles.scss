@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+  margin-top: 16px;
+  border-spacing: 0;
+
+  th {
+    text-align: left;
+    min-width: 120px;
+    position: sticky;
+    top: 68px;
+    background-color: #fff;
+  }
+  
+  th, td {
+    padding: 8px;
+  }
+
+  tr:nth-child(odd) {
+    background-color: rgba(0,0,0,0.05);;
+  }
+
+  td {
+    border: 1px solid #dee2e6;
+  }
+}
+
+.sort-column {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

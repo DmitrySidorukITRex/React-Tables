@@ -1,7 +1,7 @@
 import { ALL_STUDIES } from '../constants';
 import { Study } from '../models';
 
-const rows: Study[] = Array.from({ length: 308 }, () => {
+const rows: Study[] = Array.from({ length: 5008 }, () => {
   const randomSelection = ALL_STUDIES[Math.floor(Math.random() * ALL_STUDIES.length)];
   return randomSelection;
 });

@@ -11,7 +11,8 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import TablePagination from './Pagination';
-import './styles.css';
+import './styles.scss';
+import PageSizeSelector from './PageSizeSelector';
 
 interface MenuProps<T> {
   data: T[];
@@ -53,52 +54,43 @@ const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<
 
   return (
     <>
-      <select
-        value={table.getState().pagination.pageSize}
-        onChange={(e) => onChangePageSize(+e.target.value)}>
-        {[10, 25, 50, 100].map((size) => (
-          <option key={size} value={size}>
-            Show {size}
-          </option>
-        ))}
-      </select>
-      <div className="table">
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder ? null : (
-                      <div
-                        className="sort-column"
-                        onClick={header.column.getToggleSortingHandler()}>
-                        {flexRender(header.column.columnDef.header, header.getContext())}
-                        {header.column.getIsSorted() ? (
-                          (header.column.getIsSorted() as string) === 'asc' ? (
-                            <KeyboardArrowUpIcon />
-                          ) : (
-                            <KeyboardArrowDownIcon />
-                          )
-                        ) : null}
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <PageSizeSelector
+        pageSize={table.getState().pagination.pageSize}
+        onChangePageSize={onChangePageSize}
+      />
+      <table>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} style={{ width: header.getSize() }}>
+                  {header.isPlaceholder ? null : (
+                    <div className="sort-column" onClick={header.column.getToggleSortingHandler()}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.column.getIsSorted() ? (
+                        (header.column.getIsSorted() as string) === 'asc' ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )
+                      ) : null}
+                    </div>
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <TablePagination
         dataLength={data.length}
         rowsLength={table.getRowModel().rows.length}

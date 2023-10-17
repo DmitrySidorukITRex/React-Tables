@@ -7,7 +7,7 @@ import { NAVIGATION } from './constants';
 function Header() {
   const nav = NAVIGATION;
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ pl: 6, pr: 6 }}>
           <Logo />

@@ -1,4 +1,4 @@
-import './styles.css';
+import styles from './styles.module.scss';
 
 interface TablePaginationProps {
   dataLength: number;
@@ -19,9 +19,11 @@ const TablePagination: React.FC<TablePaginationProps> = ({
     paginationBtnCount > 7
       ? Array.from(Array(7).keys()).map((index) => {
           const btnSettings = getBtnSettings(index);
-
           return (
-            <button key={index} onClick={() => onChangePageIndex(btnSettings.value)}>
+            <button
+              key={index}
+              className={+btnSettings.label - 1 === currentPageIndex ? styles.active : ''}
+              onClick={() => onChangePageIndex(btnSettings.value)}>
               {btnSettings.label}
             </button>
           );
@@ -58,11 +60,11 @@ const TablePagination: React.FC<TablePaginationProps> = ({
   }
 
   return (
-    <div className="pagination">
-      <div className="info">
+    <div className={styles.pagination}>
+      <div>
         Showing 1 to {rowsLength} of {dataLength}
       </div>
-      <div className="controls">
+      <div>
         <button
           type="button"
           disabled={currentPageIndex === 0}

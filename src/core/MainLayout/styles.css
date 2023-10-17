@@ -1,4 +1,6 @@
 main {
   max-width: 1140px;
+  min-height: calc(100vh - 149px);
   margin: 0 auto;
+  padding: 20px 0;
 }

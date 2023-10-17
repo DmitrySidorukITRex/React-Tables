@@ -5,7 +5,6 @@ import * as Styled from './styled';
 function Footer() {
   return (
     <Styled.Footer>
-      <hr />
       <h4
         css={css`
           text-align: center;
