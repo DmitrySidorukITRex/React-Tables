@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import Table from 'components/Table/Table';
 import Spinner from 'ui/Spinner';
 import { Study } from '../../models/study';
-import { getAllStudies } from '../../services/allStudies';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'store/store';
+import { fetchAllStudies } from '../../store/studiesSlice';
 
 const columnHelper = createColumnHelper<Study>();
 
@@ -15,7 +17,7 @@ const columns = [
   columnHelper.accessor('startDate', {
     header: 'Start Date',
     cell: (info) =>
-      new Intl.DateTimeFormat('en-us').formatToParts(info.getValue()).map((part) => {
+      new Intl.DateTimeFormat('en-us').formatToParts(new Date(info.getValue())).map((part) => {
         if (part.type === 'literal') {
           return '-';
         }
@@ -43,17 +45,17 @@ const columns = [
 ];
 
 const AllStudiesTable = () => {
-  const [allStudies, setAllStudies] = useState<Study[]>([]);
+  const allStudies = useSelector((state: RootState) => state.studies.data);
+  const isLoading = useSelector((state: RootState) => state.studies.isLoading);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    getAllStudies().then((data) => {
-      setAllStudies(data);
-    });
-  });
+    dispatch(fetchAllStudies());
+  }, []);
 
   return (
     <>
-      {allStudies.length ? (
+      {!isLoading ? (
         <>
           <Table data={allStudies} columns={columns as ColumnDef<Study>[]} />
         </>
