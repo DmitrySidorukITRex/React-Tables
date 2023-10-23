@@ -1,3 +1,3 @@
-import AllStudiesHeader from './components/AllStudiesHeader';
+import AllStudiesHeader from './components/AllStudiesHeader/AllStudiesHeader';
 
 export { AllStudiesHeader };

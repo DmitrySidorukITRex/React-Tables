@@ -1,6 +1,6 @@
 export interface Study {
   name: string;
-  startDate: Date;
+  startDate: string;
   type: string;
   models: string[];
   points: number;

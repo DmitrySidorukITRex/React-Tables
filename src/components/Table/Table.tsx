@@ -10,9 +10,9 @@ import {
 import { PropsWithChildren, useEffect, useState } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import TablePagination from './Pagination/Pagination';
+import TablePagination from './components/Pagination/Pagination';
 import './styles.scss';
-import PageSizeSelector from './PageSizeSelector/PageSizeSelector';
+import PageSizeSelector from './components/PageSizeSelector/PageSizeSelector';
 
 interface MenuProps<T> {
   data: T[];
