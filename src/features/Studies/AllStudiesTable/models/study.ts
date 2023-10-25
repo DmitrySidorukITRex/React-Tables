@@ -6,3 +6,8 @@ export interface Study {
   points: number;
   center: string;
 }
+
+export interface StudyColumn {
+  name: string;
+  isSelected: boolean;
+}

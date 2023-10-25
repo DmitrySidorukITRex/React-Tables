@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import Table from 'components/Table/Table';
 import Spinner from 'ui/Spinner';
-import { Study } from '../../models/study';
+import { Study, StudyColumn } from '../../models/study';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store/store';
-import { fetchAllStudies } from '../../store/studiesSlice';
+import { changeColumnVisibility, fetchAllStudies } from '../../store/studiesSlice';
 
 const columnHelper = createColumnHelper<Study>();
 
-const columns = [
+const tableColumns = [
   columnHelper.accessor('name', {
     header: 'Study Name',
     size: 300,
@@ -47,17 +47,30 @@ const columns = [
 const AllStudiesTable = () => {
   const allStudies = useSelector((state: RootState) => state.studies.data);
   const isLoading = useSelector((state: RootState) => state.studies.isLoading);
+  const columns = useSelector((state: RootState) => state.studies.columns);
   const dispatch = useDispatch<AppDispatch>();
+  const availableColumns = tableColumns.filter(
+    (x) => columns.find((y) => y.name === x.header)?.isSelected,
+  );
 
   useEffect(() => {
     dispatch(fetchAllStudies());
   }, []);
 
+  const onSelectColumn = (column: StudyColumn) => {
+    dispatch(changeColumnVisibility(column));
+  };
+
   return (
     <>
       {!isLoading ? (
         <>
-          <Table data={allStudies} columns={columns as ColumnDef<Study>[]} />
+          <Table
+            data={allStudies}
+            tableColumns={availableColumns as ColumnDef<Study>[]}
+            columns={columns}
+            onSelectColumn={onSelectColumn}
+          />
         </>
       ) : (
         <Spinner />

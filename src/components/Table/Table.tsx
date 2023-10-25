@@ -13,19 +13,28 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import TablePagination from './components/Pagination/Pagination';
 import './styles.scss';
 import PageSizeSelector from './components/PageSizeSelector/PageSizeSelector';
+import ColumnsSelector from './components/ColumnsSelector/ColumnsSelector';
+import { StudyColumn } from 'features/Studies/AllStudiesTable/models/study';
 
-interface MenuProps<T> {
+interface TableProps<T> {
   data: T[];
-  columns: ColumnDef<T>[];
+  tableColumns: ColumnDef<T>[];
+  columns: StudyColumn[];
+  onSelectColumn: (column: StudyColumn) => void;
 }
 
-const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<T>>) => {
+const Table = <T extends object>({
+  data,
+  tableColumns,
+  columns,
+  onSelectColumn,
+}: PropsWithChildren<TableProps<T>>) => {
   const [pageSize, setPageSize] = useState(10);
   const [pageIndex, setPageIndex] = useState(0);
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data: data,
-    columns,
+    columns: tableColumns,
     state: {
       sorting,
     },
@@ -54,10 +63,13 @@ const Table = <T extends object>({ data, columns }: PropsWithChildren<MenuProps<
 
   return (
     <>
-      <PageSizeSelector
-        pageSize={table.getState().pagination.pageSize}
-        onChangePageSize={onChangePageSize}
-      />
+      <div className="table-header">
+        <PageSizeSelector
+          pageSize={table.getState().pagination.pageSize}
+          onChangePageSize={onChangePageSize}
+        />
+        <ColumnsSelector columns={columns} selectColumn={onSelectColumn} />
+      </div>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

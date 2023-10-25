@@ -12,3 +12,18 @@ body, h1, h2, h3, h4, h5, h6 {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+button {
+  display: flex;
+  background-color: #fff;
+  border-radius: 6px;
+  border-color: rgba(0,0,0,.2);
+  border-width: 1px;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background-color: rgba(0,0,0,.1);
+  }
+}

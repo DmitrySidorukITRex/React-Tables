@@ -64,7 +64,7 @@ const TablePagination: React.FC<TablePaginationProps> = ({
       <div>
         Showing 1 to {rowsLength} of {dataLength}
       </div>
-      <div>
+      <div className="controls">
         <button
           type="button"
           disabled={currentPageIndex === 0}
