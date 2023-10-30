@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
+import { CustomButton } from 'ui/Button';
 import './styles.scss';
 
 const AllStudiesHeader = () => {
@@ -10,10 +11,10 @@ const AllStudiesHeader = () => {
       {!isLoading && (
         <>
           <h1>All Studies</h1>
-          <div className="contorls">
-            <button type="button">Add Study</button>
-            <button type="button">Add Study Set</button>
-            <button type="button">Show Editable Studies Only</button>
+          <div className="controls">
+            <CustomButton>Add Study</CustomButton>
+            <CustomButton>Add Study Set</CustomButton>
+            <CustomButton variant="outlined">Show Editable Studies Only</CustomButton>
           </div>
         </>
       )}

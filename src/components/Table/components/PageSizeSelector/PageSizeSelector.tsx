@@ -1,3 +1,4 @@
+import { NativeSelect } from '@mui/material';
 import './styles.scss';
 
 interface PageSizeSelectorProps {
@@ -9,13 +10,13 @@ const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({ pageSize, onChangeP
   return (
     <div className="size-selector">
       <span>Show </span>
-      <select value={pageSize} onChange={(e) => onChangePageSize(+e.target.value)}>
+      <NativeSelect defaultValue={pageSize} onChange={(e) => onChangePageSize(+e.target.value)}>
         {[10, 25, 50, 100].map((size) => (
           <option key={size} value={size}>
             {size}
           </option>
         ))}
-      </select>
+      </NativeSelect>
       <span> entries</span>
     </div>
   );

@@ -3,6 +3,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { StudyColumn } from 'features/Studies/AllStudiesTable/models/study';
 import { useState } from 'react';
+import { CustomButton } from 'ui/Button';
 import './styles.scss';
 
 interface ColumnsSelectorProps {
@@ -24,9 +25,9 @@ const ColumnsSelector: React.FC<ColumnsSelectorProps> = ({ columns, selectColumn
 
   return (
     <>
-      <button type="button" onClick={handleClick}>
+      <CustomButton variant="outlined" onClick={handleClick}>
         <SettingsIcon />
-      </button>
+      </CustomButton>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

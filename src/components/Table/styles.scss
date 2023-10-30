@@ -8,15 +8,14 @@ table {
     min-width: 120px;
     position: sticky;
     top: 68px;
-    background-color: #fff;
   }
   
   th, td {
     padding: 8px;
   }
 
-  tr:nth-child(odd) {
-    background-color: rgba(0,0,0,0.05);;
+  tbody tr:nth-child(odd) {
+    background-color: rgba(0,0,0,0.05);
   }
 
   td {

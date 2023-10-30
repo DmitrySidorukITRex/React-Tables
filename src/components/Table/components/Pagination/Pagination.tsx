@@ -1,3 +1,4 @@
+import { CustomButton } from 'ui/Button';
 import './styles.scss';
 
 interface TablePaginationProps {
@@ -20,18 +21,24 @@ const TablePagination: React.FC<TablePaginationProps> = ({
       ? Array.from(Array(7).keys()).map((index) => {
           const btnSettings = getBtnSettings(index);
           return (
-            <button
+            <CustomButton
               key={index}
+              variant="outlined"
               className={+btnSettings.label - 1 === currentPageIndex ? 'active' : ''}
+              size="small"
               onClick={() => onChangePageIndex(btnSettings.value)}>
               {btnSettings.label}
-            </button>
+            </CustomButton>
           );
         })
       : Array.from(Array(paginationBtnCount).keys()).map((index) => (
-          <button key={index} onClick={() => onChangePageIndex(index)}>
+          <CustomButton
+            key={index}
+            variant="outlined"
+            size="small"
+            onClick={() => onChangePageIndex(index)}>
             {index + 1}
-          </button>
+          </CustomButton>
         ));
 
   function getBtnSettings(index: number): { label: string; value: number } {
@@ -64,20 +71,22 @@ const TablePagination: React.FC<TablePaginationProps> = ({
       <div>
         Showing 1 to {rowsLength} of {dataLength}
       </div>
-      <div className="controls">
-        <button
-          type="button"
+      <div>
+        <CustomButton
+          variant="outlined"
           disabled={currentPageIndex === 0}
+          size="small"
           onClick={() => onChangePageIndex(currentPageIndex - 1)}>
           Previous
-        </button>
+        </CustomButton>
         {paginationButtons}
-        <button
-          type="button"
+        <CustomButton
+          variant="outlined"
           disabled={currentPageIndex === paginationBtnCount - 1}
+          size="small"
           onClick={() => onChangePageIndex(currentPageIndex + 1)}>
           Next
-        </button>
+        </CustomButton>
       </div>
     </div>
   );
