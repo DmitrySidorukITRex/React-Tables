@@ -9,13 +9,19 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { store } from 'store/store';
 import { Provider } from 'react-redux';
+import { StyledEngineProvider } from '@mui/material';
+import CustomThemeProvider from 'theme/ThemeProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <StyledEngineProvider injectFirst>
+          <CustomThemeProvider>
+            <App />
+          </CustomThemeProvider>
+        </StyledEngineProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

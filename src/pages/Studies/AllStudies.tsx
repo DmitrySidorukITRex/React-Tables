@@ -1,4 +1,4 @@
-import { AllStudiesHeader } from 'features/Studies/AllStudiesHeader';
+import AllStudiesHeader from 'features/Studies/AllStudiesHeader';
 import { AllStudiesTable } from 'features/Studies/AllStudiesTable';
 
 const AllStudies = () => {

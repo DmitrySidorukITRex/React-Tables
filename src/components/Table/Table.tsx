@@ -15,6 +15,7 @@ import './styles.scss';
 import PageSizeSelector from './components/PageSizeSelector/PageSizeSelector';
 import ColumnsSelector from './components/ColumnsSelector/ColumnsSelector';
 import { StudyColumn } from 'features/Studies/AllStudiesTable/models/study';
+import { useTheme } from '@mui/material/styles';
 
 interface TableProps<T> {
   data: T[];
@@ -43,6 +44,7 @@ const Table = <T extends object>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+  const theme = useTheme();
 
   useEffect(() => {
     table.setPageSize(pageSize);
@@ -75,7 +77,12 @@ const Table = <T extends object>({
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} style={{ width: header.getSize() }}>
+                <th
+                  key={header.id}
+                  style={{
+                    width: header.getSize(),
+                    backgroundColor: theme.palette.background.default,
+                  }}>
                   {header.isPlaceholder ? null : (
                     <div className="sort-column" onClick={header.column.getToggleSortingHandler()}>
                       {flexRender(header.column.columnDef.header, header.getContext())}
